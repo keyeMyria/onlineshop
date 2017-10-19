@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import sys
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # get project root dir
 sys.path.insert(0, BASE_DIR)     # import from root dir , i.e. MxShop dir
@@ -31,6 +32,10 @@ SECRET_KEY = 'yt6bltbhp0x8ajckyh9$1*3o7%dijoc*$8om3x@x0yudbnpjmq'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+# custom
+AUTH_USER_MODEL = 'user.UserProfile'
 
 
 # Application definition
