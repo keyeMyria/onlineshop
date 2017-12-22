@@ -34,8 +34,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# custom
-AUTH_USER_MODEL = 'user.UserProfile'
+# custom auth_model
+AUTH_USER_MODEL = 'users.UserProfile'
 
 
 # Application definition
@@ -48,10 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'DjangoUeditor',
-    'users',
-    'goods',
-    'trade',
-    'user_operation',
+    'goods.apps.GoodsConfig',
+    'trade.apps.TradeConfig',
+    'user_operation.apps.UserOperationConfig',
 ]
 
 MIDDLEWARE = [
