@@ -20,6 +20,8 @@ class UserProfile(AbstractUser):
     mobile = models.CharField(max_length=11, verbose_name="电话")
     email = models.CharField(max_length=100, null=True, blank=True, verbose_name="邮箱")
 
+    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+
     class Meta:
         verbose_name = "用户"
         verbose_name_plural = verbose_name
