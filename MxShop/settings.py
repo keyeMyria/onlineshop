@@ -35,22 +35,25 @@ ALLOWED_HOSTS = []
 
 
 # custom auth_model
-AUTH_USER_MODEL = 'users.UserProfile'
+AUTH_USER_MODEL = "users.UserProfile"
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
-    'DjangoUeditor',
     'goods.apps.GoodsConfig',
     'trade.apps.TradeConfig',
     'user_operation.apps.UserOperationConfig',
+    'DjangoUeditor',
+    'xadmin',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -123,15 +126,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+
+#设置时区
+LANGUAGE_CODE = 'zh-hans'    #中文支持，django1.8以后支持；1.8以前是zh-cn
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False # if True, will use UTC time
 
 
 # Static files (CSS, JavaScript, Images)

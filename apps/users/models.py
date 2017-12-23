@@ -15,7 +15,7 @@ class UserProfile(AbstractUser):
     # New added field as follows, others will inherit, such as username, password
     name = models.CharField(max_length=30, null=True, blank=True, verbose_name="姓名")
     birthday = models.DateField(null=True, blank=True, verbose_name="出生年月")
-    gender = models.CharField(max_length=6, choices=(("male", u"男"), ("female", u"女"), ("privacy", u"保密")),
+    gender = models.CharField(max_length=12, choices=(("male", u"男"), ("female", u"女"), ("privacy", u"保密")),
                               default="privacy", verbose_name="性别")
     mobile = models.CharField(max_length=11, verbose_name="电话")
     email = models.CharField(max_length=100, null=True, blank=True, verbose_name="邮箱")
