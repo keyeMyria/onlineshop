@@ -1,3 +1,4 @@
+#!/usr/bin/python env
 # coding=utf-8
 """
 Django settings for MxShop project.
@@ -138,7 +139,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False # if True, will use UTC time
+USE_TZ = False     # if True, will use UTC time
 
 
 # Static files (CSS, JavaScript, Images)
