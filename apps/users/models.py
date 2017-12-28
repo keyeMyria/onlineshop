@@ -27,7 +27,8 @@ class UserProfile(AbstractUser):
         verbose_name_plural = verbose_name
 
     def __str__(self):       # python3 use __str__, python2 use __unicode__
-        return self.name
+        # return self.name      # 否则会触发xadmin后台登陆后，访问drf api报错
+        return self.username
 
 
 # for save captcha, not only save in database, but also save in memory
