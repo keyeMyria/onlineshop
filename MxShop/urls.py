@@ -23,9 +23,23 @@ from django.views.static import serve
 import xadmin
 from MxShop.settings import MEDIA_ROOT
 # from goods.views_base import GoodsListView
-from goods.views import GoodsListView
+from goods.views import GoodsListViewSet
 
 from rest_framework.documentation import include_docs_urls
+from rest_framework.routers import DefaultRouter
+
+
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+
+# Config goods url
+router.register(r'goods', GoodsListViewSet)
+
+
+# custom bind -- comment Because use router
+# goods_list = GoodsListViewSet.as_view({
+#     'get': 'list',
+# })
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -36,7 +50,8 @@ urlpatterns = [
 
     # rest framework docs
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'goods/$', GoodsListView.as_view(), name="good-list"),
+    url(r'^', include(router.urls)),
+    # url(r'goods/$', goods_list, name="good-list"),    # because use router
     url(r'doc/', include_docs_urls(title="招财猫电商API")),
 
 ]
