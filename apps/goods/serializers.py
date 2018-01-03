@@ -5,8 +5,25 @@
 
 from rest_framework import serializers
 
+from goods.models import Goods, GoodsCategory
 
-class GoodsSerializer(serializers.Serializer):
-    name = serializers.CharField(required=False, max_length=100)
-    click_num = serializers.IntegerField(default=0)
-    goods_front_image = serializers.ImageField()
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GoodsCategory
+        fields = "__all__"
+
+
+class GoodsSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+
+    class Meta:
+        model = Goods
+        # fields = ('name', 'click_num', 'market_price', 'add_time')
+        # get all fields
+        fields = "__all__"
+
+
+
+
+
