@@ -33,7 +33,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 
 # Config goods url
-router.register(r'goods', GoodsListViewSet)
+router.register(r'goods', GoodsListViewSet, base_name="goods")
 
 
 # custom bind -- comment Because use router
