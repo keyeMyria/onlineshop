@@ -23,7 +23,7 @@ from django.views.static import serve
 import xadmin
 from MxShop.settings import MEDIA_ROOT
 # from goods.views_base import GoodsListView
-from goods.views import GoodsListViewSet
+from goods.views import GoodsListViewSet, CategoryViewSet
 
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
@@ -34,6 +34,9 @@ router = DefaultRouter()
 
 # Config goods url
 router.register(r'goods', GoodsListViewSet, base_name="goods")
+
+# Config category url
+router.register(r'categorys', CategoryViewSet, base_name="categorys")
 
 
 # custom bind -- comment Because use router
@@ -50,8 +53,9 @@ urlpatterns = [
 
     # rest framework docs
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'doc/', include_docs_urls(title="招财猫电商API")),
+
     url(r'^', include(router.urls)),
     # url(r'goods/$', goods_list, name="good-list"),    # because use router
-    url(r'doc/', include_docs_urls(title="招财猫电商API")),
 
 ]
