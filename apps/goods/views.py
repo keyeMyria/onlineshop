@@ -18,9 +18,9 @@ from .filters import GoodsFilter
 # Create your views here.
 # Custom Config Pagination
 class GoodsPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 12
     page_size_query_param = 'page_size'
-    page_query_param = 'p'
+    page_query_param = 'page'
     max_page_size = 100
 
 
@@ -38,7 +38,7 @@ class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     filter_class = GoodsFilter     # custom filter
     search_fields = ('name', 'goods_brief', 'goods_desc')
-    ordering_fields = ('sold_num', 'add_time')
+    ordering_fields = ('sold_num', 'shop_price')
 
     # def get_queryset(self):
     #     queryset = Goods.objects.all()
