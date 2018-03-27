@@ -25,6 +25,7 @@ from MxShop.settings import MEDIA_ROOT
 # from goods.views_base import GoodsListView
 from goods.views import GoodsListViewSet, CategoryViewSet
 
+from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
 
@@ -53,6 +54,8 @@ urlpatterns = [
 
     # rest framework docs
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-token-auth/', views.obtain_auth_token),
+
     url(r'doc/', include_docs_urls(title="招财猫电商API")),
 
     url(r'^', include(router.urls)),
