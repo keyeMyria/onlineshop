@@ -30,6 +30,7 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
 from rest_framework.schemas import get_schema_view
 
+from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
 
 
@@ -57,11 +58,19 @@ urlpatterns = [
     # goods list page
     # url(r'goods/$', GoodsListView.as_view(), name="good-list"),
 
-    # rest framework docs
+    # django rest framework auth
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # drf自带的token认证模式
     url(r'^api-token-auth/', views.obtain_auth_token),
 
+    # jwt的认证接口   配合vue的接口
+    url(r'^login/', obtain_jwt_token, name="jwt_auth"),
+
+    # drf自带的doc
     url(r'doc/', include_docs_urls(title="招财猫电商API")),
+
+    # swagger doc
     url(r'swagger_doc/', schema_view, name="swagger_doc"),  # need to comfirm
 
 
