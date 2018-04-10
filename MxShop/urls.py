@@ -28,7 +28,12 @@ from goods.views import GoodsListViewSet, CategoryViewSet
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
+from rest_framework.schemas import get_schema_view
 
+from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
+
+
+schema_view = get_schema_view(title='招财猫电商Swagger API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -57,6 +62,8 @@ urlpatterns = [
     url(r'^api-token-auth/', views.obtain_auth_token),
 
     url(r'doc/', include_docs_urls(title="招财猫电商API")),
+    url(r'swagger_doc/', schema_view, name="swagger_doc"),  # need to comfirm
+
 
     url(r'^', include(router.urls)),
     # url(r'goods/$', goods_list, name="good-list"),    # because use router
