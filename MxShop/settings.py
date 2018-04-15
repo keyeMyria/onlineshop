@@ -17,6 +17,8 @@ import sys
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.conf.global_settings import AUTHENTICATION_BACKENDS
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))     # get project root dir
 sys.path.insert(0, BASE_DIR)     # import from root dir , i.e. MxShop dir
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))        # MxShop/apps
@@ -147,6 +149,9 @@ USE_L10N = True
 
 USE_TZ = False     # if True, will use UTC time
 
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -201,6 +206,13 @@ SWAGGER_SETTINGS = {
 
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
+
+import datetime
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    # 'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=600),
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+}
 
 
 
