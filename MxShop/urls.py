@@ -24,6 +24,7 @@ import xadmin
 from MxShop.settings import MEDIA_ROOT
 # from goods.views_base import GoodsListView
 from goods.views import GoodsListViewSet, CategoryViewSet
+from users.views import SmsCodeViewSet
 
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
@@ -44,6 +45,9 @@ router.register(r'goods', GoodsListViewSet, base_name="goods")
 
 # Config category url
 router.register(r'categorys', CategoryViewSet, base_name="categorys")
+
+# Config send sms url
+router.register(r'codes', SmsCodeViewSet, base_name="codes")
 
 
 # custom bind -- comment Because use router
