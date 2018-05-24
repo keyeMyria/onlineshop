@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import sys
-
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.conf.global_settings import AUTHENTICATION_BACKENDS
@@ -207,7 +207,7 @@ SWAGGER_SETTINGS = {
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
 
-import datetime
+
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
     # 'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=600),
@@ -215,4 +215,12 @@ JWT_AUTH = {
 }
 
 
+# 手机号码正则表达式
+REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 
+# REGEX_MOBILE = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$"
+
+# Twilio API
+TWILIO_ACCOUNT_SID = "AC36808dad92e1e2fd554f79e5c93cbea5"
+TWILIO_AUTH_TOKEN = "ff08d28154060b6beccb6537f6850840"
+TWILIO_SENDER_NUM = "+18502795687"
