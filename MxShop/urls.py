@@ -24,7 +24,7 @@ import xadmin
 from MxShop.settings import MEDIA_ROOT
 # from goods.views_base import GoodsListView
 from goods.views import GoodsListViewSet, CategoryViewSet
-from users.views import SmsCodeViewSet
+from users.views import SmsCodeViewSet, UserViewset
 
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
@@ -49,6 +49,9 @@ router.register(r'categorys', CategoryViewSet, base_name="categorys")
 # Config send sms url
 router.register(r'codes', SmsCodeViewSet, base_name="codes")
 
+# Config user register
+router.register(r'users', UserViewset, base_name="users")
+
 
 # custom bind -- comment Because use router
 # goods_list = GoodsListViewSet.as_view({
@@ -71,11 +74,11 @@ urlpatterns = [
     # jwt的认证接口   配合vue的接口
     url(r'^login/', obtain_jwt_token, name="jwt_auth"),
 
-    # drf自带的doc
-    url(r'doc/', include_docs_urls(title="招财猫电商API")),
+    # drf自带的doc, DRF Built-in API docs and Generate schema with valid `request` instance
+    url(r'^bi_docs/', include_docs_urls(title="招财猫电商API", public=False)),
 
     # swagger doc
-    url(r'swagger_doc/', schema_view, name="swagger_doc"),  # need to comfirm
+    url(r'^swagger_docs/', schema_view, name="swagger_docs"),  # need to comfirm
 
 
     url(r'^', include(router.urls)),

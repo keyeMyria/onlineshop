@@ -11,7 +11,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 from users.models import VerifyCode
-from users.serializers import SmsSerializer
+from users.serializers import SmsSerializer, UserRegSerializer
 from utils.twilio_sms_sender import TwilioSmsSender
 from MxShop.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_SENDER_NUM
 
@@ -79,8 +79,9 @@ class SmsCodeViewSet(CreateModelMixin, viewsets.GenericViewSet):
             }, status=status.HTTP_201_CREATED)
 
 
-
-
-
-
-
+class UserViewset(CreateModelMixin, viewsets.GenericViewSet):
+    """
+    User
+    """
+    serializer_class = UserRegSerializer
+    queryset = User.objects.all()
