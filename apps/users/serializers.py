@@ -42,8 +42,42 @@ class SmsSerializer(serializers.Serializer):
         return mobile
 
 
+class UserRegSerializer(serializers.ModelSerializer):
+    code = serializers.CharField(required=True, max_length=4, min_length=4,
+                                 error_messages={
+                                     'blank': '请输入验证码',
+                                     'required': '请输入验证码',
+                                     'max_length': '验证码格式错误',
+                                     'minx_length': '验证码格式错误',
+                                 }, help_text='验证码')   # 添加的字段
 
+    def validate_code(self, code):
+        # 验证验证码是否存在于数据库
+        verify_records = VerifyCode.objects.filter(mobile=self.initial_data["username"]).order_by("-add_time")   # initial_data, from front_end post
 
+        if verify_records:
+            last_record = verify_records[0]
+
+            five_minute_ago = datetime.now() - timedelta(hours=0, minutes=5, seconds=0)   # 有效期5分钟
+            # 减去5mins (five_minute_ago) > add_time说明还没有超过5mins, 即没过期
+            if five_minute_ago < last_record.add_time:
+                raise serializers.ValidationError("验证码过期")
+
+            if last_record.code != code:
+                raise serializers.ValidationError("验证码错误")
+
+        else:
+
+            raise serializers.ValidationError("验证码错误")
+
+    def validate(self, attrs):
+        attrs['mobile'] = attrs['username']
+        del attrs['code']
+        return attrs
+
+    class Meta:
+        model = User
+        fields = ("username", "code", "mobile")       # UserProfile继承的是django自带的字段
 
 
 
