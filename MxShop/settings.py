@@ -34,7 +34,10 @@ SECRET_KEY = 'yt6bltbhp0x8ajckyh9$1*3o7%dijoc*$8om3x@x0yudbnpjmq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '0.0.0.0',
+]
 
 
 # custom auth_model
@@ -221,6 +224,6 @@ REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 # REGEX_MOBILE = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$"
 
 # Twilio API
-TWILIO_ACCOUNT_SID = "AC36808dad92e1e2fd554f79e5c93cbea5"
-TWILIO_AUTH_TOKEN = "ff08d28154060b6beccb6537f6850840"
+TWILIO_ACCOUNT_SID = "AC36808dad92e1e2fd554f79e5c93cbe"
+TWILIO_AUTH_TOKEN = "ff08d28154060b6beccb6537f68508"
 TWILIO_SENDER_NUM = "+18502795687"

@@ -46,8 +46,8 @@ router.register(r'goods', GoodsListViewSet, base_name="goods")
 # Config category url
 router.register(r'categorys', CategoryViewSet, base_name="categorys")
 
-# Config send sms url
-router.register(r'codes', SmsCodeViewSet, base_name="codes")
+# Config send sms url  -- can test by admin add sms_code
+router.register(r'code', SmsCodeViewSet, base_name="code")     # will connect to frontend code，change key in settings
 
 # Config user register
 router.register(r'users', UserViewset, base_name="users")
@@ -81,7 +81,7 @@ urlpatterns = [
     url(r'^swagger_docs/', schema_view, name="swagger_docs"),  # need to comfirm
 
 
-    url(r'^', include(router.urls)),
+    url(r'^', include(router.urls)),   # api在根目录，一般不会这样的
     # url(r'goods/$', goods_list, name="good-list"),    # because use router
 
 ]
