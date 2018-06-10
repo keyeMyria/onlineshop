@@ -19,13 +19,15 @@ from .filters import GoodsFilter
 # Create your views here.
 # Custom Config Pagination
 class GoodsPagination(PageNumberPagination):
-    page_size = 12
-    page_size_query_param = 'page_size'
-    page_query_param = 'page'
-    max_page_size = 100
+    # page_size = 12
+    # page_size_query_param = 'page_size'
+    # page_query_param = 'page'
+    # max_page_size = 100
+    # 全局设置过的话一般不推荐局部再设置了，否则会报错
+    pass
 
 
-class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class GoodsListViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
     Goods List: 分页、搜索、过滤、排序
     """
