@@ -17,7 +17,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-# from django.contrib import admin
+from django.contrib import admin
 from django.views.static import serve
 
 import xadmin
@@ -25,6 +25,7 @@ from MxShop.settings import MEDIA_ROOT
 # from goods.views_base import GoodsListView
 from goods.views import GoodsListViewSet, CategoryViewSet
 from users.views import SmsCodeViewSet, UserViewset
+from user_operation.views import UserFavViewset
 
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
@@ -52,6 +53,10 @@ router.register(r'code', SmsCodeViewSet, base_name="code")     # will connect to
 # Config user register
 router.register(r'users', UserViewset, base_name="users")
 
+# Config user collection favorite things
+router.register(r'userfavs', UserFavViewset, base_name="userfavs")
+
+
 
 # custom bind -- comment Because use router
 # goods_list = GoodsListViewSet.as_view({
@@ -59,7 +64,11 @@ router.register(r'users', UserViewset, base_name="users")
 # })
 
 urlpatterns = [
+
+    url(r'^admin/', admin.site.urls),
+
     url(r'^xadmin/', xadmin.site.urls),
+
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 
     # goods list page

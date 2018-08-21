@@ -6,10 +6,9 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth import get_user_model
 
+
 from goods.models import Goods
 
-
-# Create your models here.
 
 User = get_user_model()
 
@@ -25,6 +24,7 @@ class UserFav(models.Model):
     class Meta:
         verbose_name = "用户收藏"
         verbose_name_plural = verbose_name
+        unique_together = ("user", "goods")   # 联合唯一索引，也可以在serializer重用UniqueTogetherValidator
 
     def __str__(self):
         return self.user.name
