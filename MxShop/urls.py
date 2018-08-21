@@ -25,6 +25,7 @@ from MxShop.settings import MEDIA_ROOT
 # from goods.views_base import GoodsListView
 from goods.views import GoodsListViewSet, CategoryViewSet
 from users.views import SmsCodeViewSet, UserViewset
+from user_operation.views import UserFavViewset
 
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
@@ -51,6 +52,10 @@ router.register(r'code', SmsCodeViewSet, base_name="code")     # will connect to
 
 # Config user register
 router.register(r'users', UserViewset, base_name="users")
+
+# Config user collection favorite things
+router.register(r'userfavs', UserFavViewset, base_name="userfavs")
+
 
 
 # custom bind -- comment Because use router
