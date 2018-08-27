@@ -27,7 +27,7 @@ class UserFav(models.Model):
         unique_together = ("user", "goods")   # 联合唯一索引，也可以在serializer重用UniqueTogetherValidator
 
     def __str__(self):
-        return self.user.name
+        return self.user.username   # self.user.name可能为空，django admin会报错
 
 
 class UserLeavingMessage(models.Model):

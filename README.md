@@ -25,3 +25,5 @@
 ```python
 print("Wanna be a full-stack python developer.")
 ```
+
+# Attention: update to Django 2.1 directly will cause exception.
