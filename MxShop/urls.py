@@ -30,13 +30,14 @@ from user_operation.views import UserFavViewset
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
-from rest_framework.schemas import get_schema_view
+
+from rest_framework_swagger.views import get_swagger_view
 
 from rest_framework_jwt.views import obtain_jwt_token
-from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
 
-
-schema_view = get_schema_view(title='招财猫电商Swagger API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
+# from rest_framework.schemas import get_schema_view
+# from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
+# schema_view = get_schema_view(title='招财猫电商Swagger API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -83,14 +84,20 @@ urlpatterns = [
     # jwt的认证接口   配合vue的接口
     url(r'^login/', obtain_jwt_token, name="jwt_auth"),
 
-    # drf自带的doc, DRF Built-in API docs and Generate schema with valid `request` instance
-    url(r'^bi_docs/', include_docs_urls(title="招财猫电商API", public=False)),
 
-    # swagger doc
-    url(r'^swagger_docs/', schema_view, name="swagger_docs"),  # need to comfirm
 
 
     url(r'^', include(router.urls)),   # api在根目录，一般不会这样的
     # url(r'goods/$', goods_list, name="good-list"),    # because use router
 
+]
+
+# config API docs
+urlpatterns += [
+    # drf自带的doc, DRF Built-in API docs and Generate schema with valid `request` instance
+    # DRF docs, pip install coreapi
+    url(r'^drf-docs/', include_docs_urls(title="招财猫电商DRF API", public=False)),
+
+    # Swagger docs, pip install django-rest-swagger
+    url(r'^swagger-docs/', get_swagger_view(title='Swagger API'))
 ]
