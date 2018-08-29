@@ -19,6 +19,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.static import serve
+from django.views.generic import TemplateView
+
 
 import xadmin
 from MxShop.settings import MEDIA_ROOT
@@ -37,7 +39,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 # from rest_framework.schemas import get_schema_view
 # from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
-# schema_view = get_schema_view(title='招财猫电商Swagger API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
+# schema_view = get_schema_view(title='AICTF Swagger API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -70,10 +72,9 @@ urlpatterns = [
 
     url(r'^xadmin/', xadmin.site.urls),
 
-    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
+    url(r'^', include(router.urls)),   # api在根目录，一般不会这样的
 
-    # goods list page
-    # url(r'goods/$', GoodsListView.as_view(), name="good-list"),
+    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 
     # django rest framework auth
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
@@ -84,11 +85,11 @@ urlpatterns = [
     # jwt的认证接口   配合vue的接口
     url(r'^login/', obtain_jwt_token, name="jwt_auth"),
 
+    # goods list page
+    # url(r'goods/$', GoodsListView.as_view(), name="good-list"),
 
-
-
-    url(r'^', include(router.urls)),   # api在根目录，一般不会这样的
     # url(r'goods/$', goods_list, name="good-list"),    # because use router
+#    url(r'^index/', TemplateView.as_view(template_name="index.html"), name="index"),
 
 ]
 
@@ -96,7 +97,7 @@ urlpatterns = [
 urlpatterns += [
     # drf自带的doc, DRF Built-in API docs and Generate schema with valid `request` instance
     # DRF docs, pip install coreapi
-    url(r'^drf-docs/', include_docs_urls(title="招财猫电商DRF API", public=False)),
+    url(r'^drf-docs/', include_docs_urls(title="AICTF DRF API", public=False)),
 
     # Swagger docs, pip install django-rest-swagger
     url(r'^swagger-docs/', get_swagger_view(title='Swagger API'))

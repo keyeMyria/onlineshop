@@ -9,7 +9,7 @@ from utils.permissions import IsOwnerOrReadOnly
 from .serializers import UserFavSerializer
 
 
-class UserFavViewset(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+class UserFavViewset(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
     User collect favorite things
     用户收藏功能
@@ -18,6 +18,7 @@ class UserFavViewset(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Dest
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
     serializer_class = UserFavSerializer
     authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
+    lookup_field = "goods_id"    # 改变了默认的PK http://www.django-rest-framework.org/api-guide/generic-views/ 是在get_queryset()的结果中
 
     def get_queryset(self):
         # Override queryset

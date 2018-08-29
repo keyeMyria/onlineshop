@@ -13,8 +13,8 @@ class GoodsFilter(django_filters.rest_framework.FilterSet):
     """
     商品大的过滤类
     """
-    pricemin = django_filters.NumberFilter(name="shop_price", lookup_expr='gte')   # 大于等于
-    pricemax = django_filters.NumberFilter(name="shop_price", lookup_expr='lte')
+    pricemin = django_filters.NumberFilter(name="shop_price", lookup_expr='gte', help_text="最低价格")   # 大于等于
+    pricemax = django_filters.NumberFilter(name="shop_price", lookup_expr='lte', help_text="最高价格")
     name = django_filters.CharFilter(name="name", lookup_expr='icontains')  # 模糊查询'contains'类似sql like, 忽略大小写加i
     # name = django_filters.CharFilter(name="name")   # 完全匹配
 

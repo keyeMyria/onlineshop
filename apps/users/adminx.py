@@ -12,8 +12,8 @@ class BaseSetting(object):
 
 
 class GlobalSettings(object):
-    site_title = "招财猫电商后台"
-    site_footer = "fullstackpentest"
+    site_title = "AICTF后台"
+    site_footer = "aictf.com"
     # menu_style = "accordion"
 
 
